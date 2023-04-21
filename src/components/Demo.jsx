@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { copy, linkIcon, loader, tick } from "../assets";
 import { useLazyGetSummaryQuery } from "../services/article";
+import Footer from "./Footer";
 const Demo = () => {
   const [article, setArticle] = useState({ url: "", summary: "" });
   const [allArticles, setAllArticles] = useState([]);
@@ -117,6 +118,7 @@ const Demo = () => {
           )}
         </div>
       </div>
+      <Footer/>
     </section>
   );
 };
