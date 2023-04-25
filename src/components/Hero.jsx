@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { logo } from "../assets";
 import AuthModal from "./Authentication/AuthModal";

@@ -1,4 +1,5 @@
-import { Box, Divider, Button, Drawer, Avatar } from "@mui/material";
+/* eslint-disable react/prop-types */
+import { Box, Divider, Drawer, Avatar } from "@mui/material";
 import * as React from "react";
 
 export default function UserSidebar({ user }) {

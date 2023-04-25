@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { Box, Button, TextField } from "@mui/material";
-import React from "react";
 import { useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import { createUserWithEmailAndPassword } from "firebase/auth";
