@@ -4,11 +4,12 @@ import React, { useState, useEffect } from "react";
 import { copy, linkIcon, loader, tick } from "../assets";
 import { useLazyGetSummaryQuery } from "../services/article";
 import Footer from "./Footer";
+
 const Demo = () => {
   const [article, setArticle] = useState({ url: "", summary: "" });
   const [allArticles, setAllArticles] = useState([]);
-  const [copied, setCopied] = useState('');
-
+  const [copied, setCopied] = useState("");
+  const [loading, setLoading] = useState(true);
   const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
 
   useEffect(() => {
@@ -30,15 +31,15 @@ const Demo = () => {
       setArticle(newArticle);
       setAllArticles(updatedAllArticles);
       localStorage.setItem("articles", JSON.stringify(updatedAllArticles));
-      console.log(newArticle);
+      setLoading(false);
     }
   };
 
   const handleCopy = (copyUrl) => {
     setCopied(copyUrl);
     navigator.clipboard.writeText(copyUrl);
-    setTimeout(()=> setCopied(false),3000)
-  }
+    setTimeout(() => setCopied(false), 3000);
+  };
 
   return (
     <section className="mt-16 w-full max-w-xl">
@@ -67,33 +68,32 @@ const Demo = () => {
             ↵
           </button>
         </form>
-        <div className="flex flex-col gap-1 max-h-60 overflow-y-auto">
-          {allArticles.map((item, index) => (
-            <div
-              key={`link-${index}`}
-              onClick={() => setArticle(item)}
-              className="link_card"
-            >
-              <div className="copy_btn" onClick={() =>handleCopy(item.url)}>
-                <img
-                  src={copied === item.url?tick:copy}
-                  alt="copyIcon"
-                  className="w-[40%] h-[40%] object-contain"
-                />
+
+        {allArticles.length > 0 && (
+          <div className="flex flex-col gap-1 max-h-60 overflow-y-auto">
+            {allArticles.map((item, index) => (
+              <div
+                key={`link-${index}`}
+                onClick={() => setArticle(item)}
+                className="link_card"
+              >
+                <div className="copy_btn" onClick={() => handleCopy(item.url)}>
+                  <img
+                    src={copied === item.url ? tick : copy}
+                    alt="copyIcon"
+                    className="w-[40%] h-[40%] object-contain"
+                  />
+                </div>
+                <p className="flex-1 font-satoshi text-blue-700 font-medium text-sm truncate">
+                  {item?.url}
+                </p>
               </div>
-              <p className="flex-1 font-satoshi text-blue-700 font-medium text-sm truncate">
-                {item.url}
-              </p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
         <div className="my-10 max-w-full flex justify-center items-center">
           {isFetching ? (
-            <img
-              src={loader}
-              alt="loader"
-              className="w-20 h-20 object-contain"
-            />
+            <img src={loader} style={{width:'100px'}}/>
           ) : error ? (
             <p className="font-inter font-bold text-black text-center">
               Well,that wasn't supposed to happen...
@@ -117,8 +117,8 @@ const Demo = () => {
             )
           )}
         </div>
+        <Footer />
       </div>
-      <Footer/>
     </section>
   );
 };

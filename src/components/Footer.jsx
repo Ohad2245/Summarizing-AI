@@ -10,8 +10,8 @@ const Footer = () => {
         Copyright © 2023 - . All right reserved Ohad
       </p>
 
-      <p className="icons">
-        <AiFillLinkedin />
+      <p className="icons filter blur-[0.5px]">
+      <a href="https://www.linkedin.com/in/ohadcohen90" target="_blank"> <AiFillLinkedin /> </a>
         <AiOutlineTwitter />
         <BsFacebook style={{ width: "25" }} />
       </p>
